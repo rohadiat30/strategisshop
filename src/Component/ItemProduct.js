@@ -1,0 +1,49 @@
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { BsPlus, BsEyeFill } from 'react-icons/bs'
+import { CartContext } from '../Context/CartContext'
+
+const ItemProduct = ({ product }) => {
+  const { addToCart, rupiah } = useContext(CartContext)
+  const { prId, linkImage, prNama, prHargaJual } = product
+  return (
+    <div>
+      <div className="border rounded-2xl border-none bg-secondary/20 h-[300px] mb-4 relative overflow-hidden group transition">
+        <div className="w-full h-full flex justify-center items-center">
+          <div className="w-[200px] mx-auto flex justify-center items-center">
+            <img
+              className="max-h-[200px] group-hover:scale-125 transition duration-300"
+              src={linkImage}
+              alt="Product"
+            />
+          </div>
+        </div>
+        <div className="absolute top-6 -right-11 group-hover:right-5 p-2 flex flex-col items-center justify-center gap-y-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+          <button>
+            <div
+              onClick={() => addToCart(product, prId)}
+              className="flex rounded-xl justify-center items-center text-white w-12 h-12 bg-secondary hover:bg-emerald-600"
+            >
+              <BsPlus className="text-3xl" />
+            </div>
+          </button>
+          <Link
+            to={`productdetail/${prId}`}
+            className="w-12 h-12 rounded-xl bg-white flex justify-center items-center text-primary drop-shadow-xl hover:bg-gray-200"
+          >
+            <BsEyeFill />
+          </Link>
+        </div>
+      </div>
+
+      <div>
+        <Link to={`/product/${prId}`}>
+          <h2 className="font-semibold text-secondary">{prNama}</h2>
+        </Link>
+        <div className="font-semibold text-dimWhite">{rupiah(prHargaJual)}</div>
+      </div>
+    </div>
+  )
+}
+
+export default ItemProduct
