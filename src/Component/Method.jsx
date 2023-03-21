@@ -1,20 +1,24 @@
-import React from "react";
-import styles, { layout } from "../Styles";
-import { methodimg } from "../Assets/index";
-import { method } from "../Data/data";
-import { motion } from "framer-motion";
+import React from 'react'
+import styles, { layout } from '../Styles'
+import { methodimg } from '../Assets/index'
+import { method } from '../Data/data'
+import { motion } from 'framer-motion'
+import { fadeIn, planetVariants, staggerContainer } from '../Utils/motion'
 
 function Method() {
   return (
     <motion.section
-      initial={{ scale: 0 }}
-      whileInView={{ scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1 }}
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false, amount: 0.25 }}
       className={layout.sectionReverse}
       id="method"
     >
-      <div className={layout.sectionImgReverse}>
+      <motion.div
+        variants={planetVariants('left')}
+        className={layout.sectionImgReverse}
+      >
         <img src={methodimg} alt="Method" className="h-[100%] relative z-[5]" />
 
         {/* gradient start */}
@@ -22,15 +26,16 @@ function Method() {
         <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40" />
         <div className="absolute z-[0] w-[50%] h-[50%] right-20 bottom-20 blue__gradient" />
         {/* gradient end */}
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
+        variants={fadeIn('left', 'tween', 0.2, 1)}
         className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}
       >
         <div className="flex flex-row justify-between w-full">
           <h1 className="flex-1 font-poppins font-semibold ss:text-[55px] text-[60px] text-white ss:leading-[70px] leading-[60px]">
             How We <span className="text-gradient">Approach</span>
-            <br className="sm:block hidden" /> <span>Our Method</span>{" "}
+            <br className="sm:block hidden" /> <span>Our Method</span>{' '}
           </h1>
         </div>
         {method.map((method, index) => (
@@ -45,9 +50,9 @@ function Method() {
             </p>
           </div>
         ))}
-      </div>
+      </motion.div>
     </motion.section>
-  );
+  )
 }
 
-export default Method;
+export default Method

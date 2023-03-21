@@ -5,6 +5,8 @@ import {
   FormInformation,
   ProductDetails,
   CartPage,
+  Login,
+  Register
 } from './Pages/index'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Footer, Header, Sidebar } from './Component'
@@ -15,7 +17,7 @@ function App() {
     <div className="overflow-hidden bg-primary w-full">
       <Router>
         <div className={`${styles.flexCenter}`}>
-          <div className='w-full'>
+          <div className="w-full">
             <Header />
           </div>
         </div>
@@ -29,6 +31,8 @@ function App() {
           <Route path="/cartpage" element={<CartPage />} />
           <Route path="/form" element={<FormInformation />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         <Sidebar />
         <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>

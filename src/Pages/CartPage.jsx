@@ -1,26 +1,33 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import CartItemPage from "../Component/CartItemPage";
-import { CartContext } from "../Context/CartContext";
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import CartItemPage from '../Component/CartItemPage'
+import { CartContext } from '../Context/CartContext'
+import { motion } from 'framer-motion'
 
 function FullCart() {
-  const { cart, total, rupiah } = useContext(CartContext);
+  const { cart, total, rupiah } = useContext(CartContext)
   return (
     <div className="mx-auto px-4 sm:px-6 lg:px-8 mb-20">
       <div className="flex items-center justify-center">
         <h1 className="flex-1 font-poppins font-semibold text-center ss:text-[60px] text-[60px] text-white ss:leading-[70px] leading-[60px]">
-          Your <span className="text-gradient">Cart</span>{" "}
+          Your <span className="text-gradient">Cart</span>{' '}
         </h1>
       </div>
 
       <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient" />
       <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40" />
       <div className="absolute z-[0] w-[50%] h-[50%] right-20 bottom-20 blue__gradient" />
-      <div className="mx-auto mt-8 max-w-3xl md:mt-12 relative z-[2]">
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        className="mx-auto mt-8 max-w-3xl md:mt-12 relative z-[2]"
+      >
         <div className="bg-primary shadow-lg shadow-secondary rounded-2xl">
           <div className="px-4 py-6 sm:px-8 sm:py-10">
             {cart.map((item) => {
-              return <CartItemPage item={item} key={item.id} />;
+              return <CartItemPage item={item} key={item.id} />
             })}
 
             <div className="mt-6 border-t border-b py-2">
@@ -38,7 +45,7 @@ function FullCart() {
             <div className="mt-6 flex items-center justify-between">
               <p className="text-sm font-medium text-dimWhite">Total</p>
               <p className="text-2xl font-semibold text-secondary">
-                <span className="text-xs font-normal text-dimWhite">IDR</span>{" "}
+                <span className="text-xs font-normal text-dimWhite">IDR</span>{' '}
                 {rupiah(total)}
               </p>
             </div>
@@ -69,9 +76,9 @@ function FullCart() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
-  );
+  )
 }
 
-export default FullCart;
+export default FullCart

@@ -4,6 +4,8 @@ import Home from './Home'
 import ProductPage from './Product'
 import ProductDetails from './ProductDetails'
 import CartPage from './CartPage'
+import Login from './Login'
+import Register from './Register'
 
 export {
     CheckoutPage,
@@ -11,5 +13,7 @@ export {
     Home,
     ProductPage,
     ProductDetails,
-    CartPage
+    CartPage,
+    Login,
+    Register
 };

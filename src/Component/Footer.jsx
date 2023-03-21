@@ -2,10 +2,16 @@ import React from "react";
 import styles from "../Styles";
 import { footerLinks, footerLinks2, socialMedia } from "../Data/data";
 import { verlogo } from "../Assets/index";
+import { motion } from "framer-motion";
+import { footerVariants } from "../Utils/motion";
 
 function Footer() {
   return (
-    <section className={`${styles.flexCenter} ${styles.paddingY} flex-col`}>
+    <motion.section
+    variants={footerVariants}
+    initial="hidden"
+    whileInView="show"
+    className={`${styles.flexCenter} ${styles.paddingY} flex-col`}>
       <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>
         <div className="flex-[1] flex flex-col justify-start mr-20 mb-10">
           <img
@@ -93,7 +99,7 @@ function Footer() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

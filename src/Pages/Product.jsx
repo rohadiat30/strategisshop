@@ -1,14 +1,15 @@
-import React, { useContext, useState } from "react";
-import { Pagination, Searchbar } from "../Component";
-import { motion } from "framer-motion";
-import { ProductContext } from "../Context/ProductContext";
-import { HeroProduct, ItemProduct } from "../Component";
+import React, { useContext, useState } from 'react'
+import { Pagination, Searchbar } from '../Component'
+import { motion } from 'framer-motion'
+import { ProductContext } from '../Context/ProductContext'
+import { HeroProduct, ItemProduct } from '../Component'
+import { fadeIn, staggerContainer } from '../Utils/motion'
 
 function Product() {
-  const { product } = useContext(ProductContext);
+  const { product } = useContext(ProductContext)
   //filter
-  console.log(...product);
-  const [search, setSearch] = useState("");
+  console.log(...product)
+  const [search, setSearch] = useState('')
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -17,14 +18,14 @@ function Product() {
       <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40" />
       <div className="absolute z-[0] w-[50%] h-[50%] right-20 bottom-20 blue__gradient" />
       <motion.section
-        initial={{ opacity: 0, y: -50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.25 }}
         className="py-16 flex flex-col items-center relative"
       >
         <h1 className="flex-1 font-poppins font-semibold ss:text-[60px] text-[60px] text-white ss:leading-[70px] leading-[60px]">
-          Product <span className="text-gradient">List</span>{" "}
+          Product <span className="text-gradient">List</span>{' '}
         </h1>
         <div className="my-20">
           <form className="w-[70vw]">
@@ -58,7 +59,7 @@ function Product() {
                 placeholder="Search Products..."
                 value={search}
                 onChange={(e) => {
-                  setSearch(e.target.value);
+                  setSearch(e.target.value)
                 }}
               />
               <button
@@ -72,26 +73,28 @@ function Product() {
         </div>
         {/* <Searchbar seacrProduct={product}/> */}
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-[30px] max-w-sm mx-auto md:max-w-none md:mx-0">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-[30px] max-w-sm mx-auto md:max-w-none md:mx-0"
+          >
             {product
               .filter((row) => {
-                if (search === "") {
-                  return row;
+                if (search === '') {
+                  return row
                 } else if (
-                  row.title.toLowerCase().includes(search.toLocaleLowerCase())
+                  row.prNama.toLowerCase().includes(search.toLocaleLowerCase())
                 ) {
-                  return row;
+                  return row
                 }
               })
-              .map((product) => {
-                return <ItemProduct product={product} key={product.prId} />;
+              .map((product, index) => {
+                return <ItemProduct product={product} key={product.prId} index={index} />
               })}
           </div>
         </div>
       </motion.section>
       {/* <Pagination /> */}
     </div>
-  );
+  )
 }
 
-export default Product;
+export default Product
